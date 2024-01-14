@@ -8,13 +8,15 @@ SOURCES += \
     patterns_examples/creational/factory_method/factorymethod.cpp \
     patterns_examples/creational/prototype/prototype.cpp \
     main.cpp \
-    patterns_examples/creational/singleton/singleton.cpp
+    patterns_examples/creational/singleton/singleton.cpp \
+    patterns_examples/structural/decorator/decorator.cpp
 
 HEADERS += \
     patterns_examples/creational/builder/builder.h \
     patterns_examples/creational/builder/extra.h \
     patterns_examples/creational/factory_method/extra.h \
     patterns_examples/ipattern.h \
+    patterns_examples/structural/decorator/decorator.h \
     starters/istarter.h \
     patternsdefs.h \
     patterns_examples/creational/prototype/extra.h \
@@ -24,4 +26,5 @@ HEADERS += \
     patterns_examples/creational/singleton/singleton_extra.h \
     starters/creational/starterbuilder.h \
     starters/creational/starterprototype.h \
-    starters/creational/startersingleton.h
+    starters/creational/startersingleton.h \
+    starters/structural/starterdecorator.h

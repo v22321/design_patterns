@@ -7,11 +7,16 @@
 namespace PatternsDefs {
 
 enum PatternsEnum : uint8_t {
+    /// Creational
     PATTERN_ABSTRACT_METHOD = 0,
     PATTERN_ABSTRACT_FACTORY,
     PATTERN_BUILDER,
     PATTERN_PROTOTYPE,
-    PATTERN_SINGLETON
+    PATTERN_SINGLETON,
+
+    /// Structural
+    PATTERN_DECORATOR
+
 };
 
 static const QHash<PatternsEnum, QString> patternNames {
