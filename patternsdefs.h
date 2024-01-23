@@ -20,11 +20,12 @@ enum PatternsEnum : uint8_t {
 };
 
 static const QHash<PatternsEnum, QString> patternNames {
-    { PATTERN_ABSTRACT_METHOD , "Abstract method" },
-    { PATTERN_ABSTRACT_FACTORY , "Abstract factory" },
-    { PATTERN_BUILDER , "Builder" },
-    { PATTERN_PROTOTYPE , "Prototype" },
-    { PATTERN_SINGLETON , "Singleton" }
+    { PATTERN_ABSTRACT_METHOD, "Abstract method" },
+    { PATTERN_ABSTRACT_FACTORY, "Abstract factory" },
+    { PATTERN_BUILDER, "Builder" },
+    { PATTERN_PROTOTYPE, "Prototype" },
+    { PATTERN_SINGLETON, "Singleton" },
+    { PATTERN_DECORATOR, "Decorator"}
 };
 
 }

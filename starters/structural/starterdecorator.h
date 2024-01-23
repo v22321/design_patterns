@@ -6,6 +6,7 @@
 
 class StarterDecorator : public IStarter
 {
+public:
     std::unique_ptr<IPattern> getPattern() const override
     {
         return std::make_unique<NDecorator::Decorator>();

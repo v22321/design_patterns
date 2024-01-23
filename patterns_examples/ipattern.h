@@ -1,27 +1,28 @@
 #ifndef IPATTERN_H
 #define IPATTERN_H
 
-#include "cstdint"
 #include "../patternsdefs.h"
 
 #include <QDebug>
 
 class IPattern {
-    PatternsDefs::PatternsEnum patternCode;
+
+protected:
+    const PatternsDefs::PatternsEnum PATTERN_CODE;
 public:
     IPattern(const PatternsDefs::PatternsEnum _patternCode)
-        : patternCode(_patternCode)
+        : PATTERN_CODE(_patternCode)
     {
         qInfo() << "Init base pattern \' "\
-                << PatternsDefs::patternNames[patternCode]
+                << PatternsDefs::patternNames[PATTERN_CODE]
                 << " \'";
     }
     virtual void operator()(const uint32_t _initVal) const {}
     virtual void work(const uint32_t _initVal = 0) const = 0;
     virtual ~IPattern()
     {
-        qInfo() << "Deinit base pattern \' "\
-                << PatternsDefs::patternNames[patternCode]
+        qInfo() << "Destroy base pattern \' "\
+                << PatternsDefs::patternNames[PATTERN_CODE]
                 << " \'";
     }
 };

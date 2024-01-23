@@ -10,8 +10,9 @@ class Decorator : public IPattern
 {
 public:
     Decorator();
+    ~Decorator();
 
-    void work(const uint32_t _initVal) const;
+    void work(const uint32_t _initVal) const override;
 };
 
 }

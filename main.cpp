@@ -5,7 +5,6 @@
 #include "starters/creational/startersingleton.h"
 #include "starters/creational/starterprototype.h"
 #include "starters/creational/starterbuilder.h"
-
 #include "starters/structural/starterdecorator.h"
 
 #include "patterns_examples/ipattern.h"

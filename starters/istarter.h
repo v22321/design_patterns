@@ -4,7 +4,7 @@
 #include <memory>
 #include "patterns_examples/ipattern.h"
 
-/// Factory method
+/// Factory method - Create custom pattern
 class IStarter {
 public:
     virtual ~IStarter() {}
