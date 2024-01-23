@@ -14,7 +14,7 @@ int main()
     qDebug() << "Start MAIN";
 
     /// Select pattern (Starter...) --- USE Factory Method Pattern
-    const std::unique_ptr<IStarter> starter { new StarterDecorator() };
+    const std::unique_ptr<IStarter> starter { new StarterBuilder() };
     /// Get pattern
     const std::unique_ptr<IPattern> pattern { starter->getPattern() };
     /// Business logic

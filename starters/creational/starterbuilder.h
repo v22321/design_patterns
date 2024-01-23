@@ -7,7 +7,7 @@
 class StarterBuilder : public IStarter
 {
 public:
-    std::unique_ptr<IPattern> getPattern() const
+    std::unique_ptr<IPattern> getPattern() const override
     {
         return std::make_unique<NBuilder::Builder>();
     }

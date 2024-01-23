@@ -7,35 +7,38 @@ namespace NBuilder {
 
 Builder::Builder() : IPattern(PatternsDefs::PATTERN_BUILDER)
 {
+    qInfo() << "Create builder\n===\n BUILDER \n===\n";
 }
 
-void Builder::operator()(const uint32_t initValue) const {
-    qInfo() << "=====";
-
-    NBuilder::BaseBuilder* builder = new NBuilder::BaseBuilder();
-
-    builder->printText();
-    builder->buildIsMax()->buildMode();
-    builder->printText();
-
-    delete builder;
-
-    qInfo() << "=====";
-}
-
-void Builder::work(const uint32_t initValue) const
+Builder::~Builder()
 {
-    qInfo() << "=====";
+    qInfo() << "\n===\nDestroy decorator";
+}
 
-    NBuilder::BaseBuilder* builder = new NBuilder::BaseBuilder();
+void Builder::work(const uint32_t _initValue) const
+{
+    auto testBuilder {
+                     [](const std::shared_ptr<NBuilder::IBuilder>& _builder) -> void {
+            qInfo() << "1) Init product";
+            _builder->printData();
 
-    builder->printText();
-    builder->buildIsMax()->buildMode();
-    builder->printText();
+            _builder->buildIsMax()->buildMode();
 
-    delete builder;
+            qInfo() << "2) Build product";
+            // Print modified data
+            _builder->printData();
 
-    qInfo() << "=====";
+            qInfo() << "3) Fin";
+        }
+    };
+
+
+    const std::vector<std::shared_ptr<IBuilder>> builderList {
+        { std::make_shared<NBuilder::BaseBuilder>(_initValue) },
+        { std::make_shared<NBuilder::UltraBuilder>(100) }
+    };
+
+    std::for_each(builderList.cbegin(), builderList.cend(), testBuilder);
 }
 
 }

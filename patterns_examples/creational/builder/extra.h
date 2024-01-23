@@ -9,80 +9,105 @@ namespace NBuilder {
 class Product {
 
 public:
-    Product() : m_mode("-"), m_size(0), m_isMax(false) {}
+    explicit Product(const uint32_t _initValue) : m_value(_initValue),
+        m_mode("-"), m_size(0), m_isMax(false) {}
 
-    void setMode(const QString& _mode) { m_mode = _mode; }
-    void setSize(const uint32_t _size) { m_size = _size; }
-    void setIsMax(const bool _isMax) { m_isMax = _isMax; }
+    void setMode(const QString& _mode) { if (m_mode != _mode) m_mode = _mode; }
+    void setSize(const uint32_t _size) { if (m_size != _size) m_size = _size; }
+    void setIsMax(const bool _isMax)   { if (m_isMax != _isMax) m_isMax = _isMax; }
 
     void printInfo() const {
-        qInfo() << "INFO >>>";
+        qInfo() << "\n=== PRODUCT INFO ===";
+
+        qInfo() << "> VALUE: " << m_value;
         qInfo() << "MODE: " << m_mode;
         qInfo() << "SIZE: " << m_size;
-        qInfo() << "ISMAX: " << m_isMax;
-        qInfo() << "INFO <<<";
+        qInfo() << "IS_MAX: " << m_isMax;
+
+        qInfo() << "=== PRODUCT INFO ===\n";
     }
 
 private:
     QString m_mode;
     uint32_t m_size;
     bool m_isMax;
+
+    uint32_t m_value;
 };
 
-class IBuilder {
+class IBuilder : public std::enable_shared_from_this<IBuilder> {
+protected:
+    std::unique_ptr<Product> m_prod;
 public:
-    virtual IBuilder* buildMode() = 0;
-    virtual IBuilder* buildSize() = 0;
-    virtual IBuilder* buildIsMax() = 0;
+    virtual std::shared_ptr<IBuilder> buildMode() = 0;
+    virtual std::shared_ptr<IBuilder> buildSize() = 0;
+    virtual std::shared_ptr<IBuilder> buildIsMax() = 0;
 
-    virtual void printText() const = 0;
+    virtual void printData() const = 0;
 };
 
 class BaseBuilder : public IBuilder {
-    Product* _prod {nullptr};
 public:
-    BaseBuilder() {
-        _prod = new Product();
-    }
-    ~BaseBuilder() {
-        delete _prod;
+    BaseBuilder(const uint32_t _initValue) {
+        m_prod = std::make_unique<Product>(_initValue);
     }
 
-    void printText() const override {
-        if (_prod == nullptr) return;
+    void printData() const override {
+        if (!m_prod) return;
 
-        _prod->printInfo();
+        m_prod->printInfo();
     }
 
-    IBuilder* buildMode() override {
-        if (_prod == nullptr) return this;
+    std::shared_ptr<IBuilder> buildMode() override {
+        if (m_prod)
+            m_prod->setMode("BASE_MODE");
 
-        _prod->setMode("Test");
-
-        return this;
+        return shared_from_this();
     }
-    IBuilder* buildSize() override {
-        if (_prod == nullptr) return this;
+    std::shared_ptr<IBuilder> buildSize() override {
+        if (m_prod)
+            m_prod->setSize(777);
 
-        _prod->setSize(100);
-
-        return this;
+        return shared_from_this();
     }
-    IBuilder* buildIsMax() override {
-        if (_prod == nullptr) return this;
+    std::shared_ptr<IBuilder> buildIsMax() override {
+        if (m_prod)
+            m_prod->setIsMax(true);
 
-        _prod->setIsMax(true);
-
-        return this;
+        return shared_from_this();
     }
 };
 
 class UltraBuilder : public IBuilder {
-    Product* m_prod;
 public:
-    UltraBuilder() { m_prod = new Product(); }
-    ~UltraBuilder() { delete m_prod; }
+    UltraBuilder(const uint32_t _initValue) {
+        m_prod = std::make_unique<Product>(_initValue);
+    }
 
+    void printData() const override {
+        if (!m_prod) return;
+
+        m_prod->printInfo();
+    }
+
+    std::shared_ptr<IBuilder> buildMode() override {
+        if (m_prod)
+            m_prod->setMode("ULTRA_MODE");
+
+        return shared_from_this();
+    }
+    std::shared_ptr<IBuilder> buildSize() override {
+        if (m_prod)
+            m_prod->setSize(1'000'000);
+
+        return shared_from_this();
+    }
+    std::shared_ptr<IBuilder> buildIsMax() override {
+        if (m_prod)
+            m_prod->setIsMax(true);
+
+        return shared_from_this();
+    }
 };
 
 }
