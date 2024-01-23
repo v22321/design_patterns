@@ -7,35 +7,32 @@ namespace NPrototype {
 
 Prototype::Prototype() : IPattern(PatternsDefs::PATTERN_PROTOTYPE)
 {
+    qInfo() << "Create prototype\n===\n PROTOTYPE \n===\n";
 }
 
-void Prototype::operator()(const uint32_t _initVal) const {
-    qInfo() << "=====";
-    NPrototype::Product* product = new NPrototype::Product("Test", 1.2);
-    qInfo() << "Product === " << product->getField();
-    NPrototype::BasePrototype *productClone = product->clone();
-    qInfo() << "Product clone === " << productClone->getField();
-    productClone->setField(11.11);
-    qInfo() << "Product === " << product->getField();
-    qInfo() << "Product clone === " << productClone->getField();
-    delete product;
-    delete productClone;
-    qInfo() << "=====";
+Prototype::~Prototype()
+{
+    qInfo() << "\n===\nDestroy prototype";
 }
 
 void Prototype::work(const uint32_t _initVal) const
 {
-    qInfo() << "=====";
-    NPrototype::Product* product = new NPrototype::Product("Test", 1.2);
-    qInfo() << "Product === " << product->getField();
-    NPrototype::BasePrototype *productClone = product->clone();
-    qInfo() << "Product clone === " << productClone->getField();
-    productClone->setField(11.11);
-    qInfo() << "Product === " << product->getField();
-    qInfo() << "Product clone === " << productClone->getField();
-    delete product;
+    const std::unique_ptr<const NPrototype::Product> product { std::make_unique<NPrototype::Product>("Proto", 1.1) };
+    qInfo() << "--- Product --- ";
+    product->printInfo();
+
+    NPrototype::AbstractPrototype* const productClone = product->clone();
+    qInfo() << "--- Product clone --- ";
+    productClone->printInfo();
+
+    productClone->setField(2.2);
+
+    qInfo() << "|Prototype|";
+    product->printInfo();
+    qInfo() << "|Product|";
+    productClone->printInfo();
+
     delete productClone;
-    qInfo() << "=====";
 }
 
 }

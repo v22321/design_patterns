@@ -5,52 +5,64 @@
 
 namespace NPrototype {
 
-enum Proto_type {
-    PROTOTYPE_1 = 0,
-    PROTOTYPE_2
-};
 
-class BasePrototype {
+class AbstractPrototype {
 protected:
     QString m_name;
     float m_field;
 
-public:
-    BasePrototype() : m_name(QString()), m_field(0) {}
-    explicit BasePrototype(const QString& _name) : m_name(_name), m_field(0) {}
-    BasePrototype(const QString& _name, const float _field) : m_name(_name), m_field(_field) {}
-    ~BasePrototype() = default;
-    virtual BasePrototype* clone() = 0;
-    void setField(const float _field)
+    AbstractPrototype(const AbstractPrototype& _other)
+        : m_name(_other.m_name), m_field(_other.m_field)
     {
-        m_field = _field;
-        qInfo() << "Default prototype set field: " << m_field;
+        qInfo() << "Abstract create copy";
     }
 
-    float getField() const { qInfo() << "GET >"; return m_field; }
+public:
+    AbstractPrototype() : m_name(QString()), m_field(0) {}
+    explicit AbstractPrototype(const QString& _name) : m_name(_name), m_field(0) {}
+    AbstractPrototype(const QString& _name, const float _field) : m_name(_name), m_field(_field) {}
 
-    // BasePrototype(const BasePrototype& _other) // = default;
-    // {
-    //     qInfo() << "COPY COPY";
-    // }
+    /// Clone prototype !
+    virtual AbstractPrototype* clone() const = 0;
+
+    void setField(const float _field)
+    {
+        if (m_field == _field) return;
+        m_field = _field;
+    }
+
+    float getField() const { return m_field; }
+
+    virtual void printInfo() const {
+        qInfo() << "Info > ";
+        qInfo() << "Name: " << m_name;
+        qInfo() << "Field: " << m_field;
+        qInfo() << "---";
+    }
 };
 
-class Product : public BasePrototype {
+class Product : public AbstractPrototype {
 private:
     float m_prodField;
 
 public:
     Product(const QString& _name, const float _field) :
-        BasePrototype(_name, _field) {}
-    BasePrototype* clone() {
+        AbstractPrototype(_name, _field) {}
+
+    AbstractPrototype* clone() const override {
         return new Product(*this);
     }
 
-    // Product(const Product& _other) = default;
-    // {
-    //     qInfo() << "COPY >>>";
-    //     setField(_other.getField());
-    // }
+    Product(const Product& _other) : AbstractPrototype(_other), m_prodField(_other.m_prodField)
+    {
+        qInfo() << "Product create copy";
+    }
+
+    void printInfo() const override {
+        AbstractPrototype::printInfo();
+        qInfo() << "Prod field: " << m_prodField;
+        qInfo() << "---\n";
+    }
 
 };
 

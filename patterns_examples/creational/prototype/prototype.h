@@ -1,7 +1,6 @@
 #ifndef PROTOTYPE_H
 #define PROTOTYPE_H
 
-#include "cstdint"
 #include "../../ipattern.h"
 
 namespace NPrototype {
@@ -12,7 +11,7 @@ class Prototype : public IPattern
 {
 public:
     Prototype();
-    void operator()(const uint32_t _initVal) const override;
+    ~Prototype();
     void work(const uint32_t _initVal) const override;
 };
 
