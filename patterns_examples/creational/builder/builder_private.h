@@ -1,5 +1,5 @@
-#ifndef EXTRA_H
-#define EXTRA_H
+#ifndef BUILDER_PRIVATE_H
+#define BUILDER_PRIVATE_H
 
 #include <QString>
 #include <QDebug>
@@ -111,4 +111,4 @@ public:
 };
 
 }
-#endif // EXTRA_H
+#endif // BUILDER_PRIVATE_H

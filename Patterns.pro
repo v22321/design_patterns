@@ -14,7 +14,7 @@ SOURCES += \
 
 HEADERS += \
     patterns_examples/creational/builder/builder.h \
-    patterns_examples/creational/builder/extra.h \
+    patterns_examples/creational/builder/builder_private.h \
     patterns_examples/creational/factory_method/extra.h \
     patterns_examples/ipattern.h \
     patterns_examples/structural/decorator/decorator.h \
