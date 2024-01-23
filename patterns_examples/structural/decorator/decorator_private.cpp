@@ -14,7 +14,7 @@ public:
 class FirstComponent : public IComponent {
 public:
     void useComponent() const override {
-        qInfo() << "First component work";
+        qInfo() << "First component is working";
     }
 };
 class SecondComponent : public IComponent {

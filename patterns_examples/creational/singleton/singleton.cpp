@@ -1,6 +1,5 @@
 #include "singleton.h"
-#include "singleton_extra.h"
-#include "../../../patternsdefs.h"
+#include "singleton_private.h"
 
 #include <QDebug>
 
@@ -8,26 +7,28 @@ namespace NSingleton {
 
 Singleton::Singleton() : IPattern(PatternsDefs::PATTERN_SINGLETON)
 {
+    qInfo() << "Create singleton\n===\n SINGLETON \n===\n";
 }
 
 Singleton::~Singleton()
 {
-}
-
-void Singleton::operator()(const uint32_t _initVal) const
-{
-    qInfo() << "=====";
-    BaseSingleton::instance()->work();
-    qInfo() << "=====";
+    qInfo() << "\n===\nDestroy singleton";
 }
 
 void Singleton::work(const uint32_t _initVal) const
 {
-    qInfo() << "=====";
-    qInfo() << "Init value: " << _initVal;
-    BaseSingleton::instance()->work();
-    BaseSingleton::instance()->work();
-    qInfo() << "=====";
+    BaseSingleton::instance()->init(_initVal);
+
+    bool stopIt {false};
+    uint8_t limit {100};
+    while (!stopIt && --limit) {
+        qInfo() << "Using singleton";
+        stopIt = BaseSingleton::instance()->work();
+        qInfo() << "Enough?" << stopIt;
+    }
+
+    if (!limit)
+        qInfo() << "> Limit reached <";
 }
 
 }

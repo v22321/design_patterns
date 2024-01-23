@@ -2,7 +2,6 @@
 #define SINGLETON_H
 
 #include "../../ipattern.h"
-#include "cstdint"
 
 namespace NSingleton {
 
@@ -12,7 +11,6 @@ public:
     Singleton();
     ~Singleton();
 
-    void operator()(const uint32_t _initVal) const override;
     void work(const uint32_t _initVal) const override;
 };
 

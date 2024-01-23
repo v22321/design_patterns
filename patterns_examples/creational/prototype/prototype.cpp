@@ -1,5 +1,5 @@
 #include "prototype.h"
-#include "extra.h"
+#include "prototype_private.h"
 
 #include <QDebug>
 

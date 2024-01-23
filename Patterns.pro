@@ -16,16 +16,16 @@ HEADERS += \
     patterns_examples/creational/builder/builder.h \
     patterns_examples/creational/builder/builder_private.h \
     patterns_examples/creational/factory_method/extra.h \
+    patterns_examples/creational/prototype/prototype_private.h \
+    patterns_examples/creational/singleton/singleton_private.h \
     patterns_examples/ipattern.h \
     patterns_examples/structural/decorator/decorator.h \
     patterns_examples/structural/decorator/decorator_private.h \
     starters/istarter.h \
     patternsdefs.h \
-    patterns_examples/creational/prototype/extra.h \
     patterns_examples/creational/prototype/prototype.h \
     patterns_examples/creational/factory_method/factorymethod.h \
     patterns_examples/creational/singleton/singleton.h \
-    patterns_examples/creational/singleton/singleton_extra.h \
     starters/creational/starterbuilder.h \
     starters/creational/starterprototype.h \
     starters/creational/startersingleton.h \

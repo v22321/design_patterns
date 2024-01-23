@@ -1,5 +1,5 @@
-#ifndef EXTRA_H
-#define EXTRA_H
+#ifndef PROTOTYPE_PRIVATE_H
+#define PROTOTYPE_PRIVATE_H
 
 #include <QDebug>
 
@@ -67,4 +67,4 @@ public:
 };
 
 }
-#endif // EXTRA_H
+#endif // PROTOTYPE_PRIVATE_H
